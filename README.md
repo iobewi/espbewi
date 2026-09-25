@@ -13,6 +13,7 @@ ESP hardware / HAL
        +-- espbewi-flash
        +-- espbewi-nvs
        +-- espbewi-partitions
+       +-- espbewi-platform
        |
        +-- future: boot / wifi / tls / time / rng
 ```
@@ -41,6 +42,12 @@ schema.
 Policy-free ESP-IDF partition-table lookup and bounded raw erase helpers.
 
 It contains no OTA slot-selection, rollback or firmware transaction semantics.
+
+### `espbewi-platform`
+
+Pure hardware descriptors such as chip IDs and boot memory geometry. It has no
+HAL dependency and is intentionally host-testable. Concrete SoC facts live
+here instead of in domain projects such as FiBeWI.
 
 ## Boundary
 
