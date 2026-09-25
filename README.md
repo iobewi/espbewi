@@ -14,8 +14,9 @@ ESP hardware / HAL
        +-- espbewi-nvs
        +-- espbewi-partitions
        +-- espbewi-platform
+       +-- espbewi-boot
        |
-       +-- future: boot / wifi / tls / time / rng
+       +-- future: wifi / tls / time / rng
 ```
 
 The repository is a workspace, **not** one monolithic crate. Consumers depend
@@ -48,6 +49,12 @@ It contains no OTA slot-selection, rollback or firmware transaction semantics.
 Pure hardware descriptors such as chip IDs and boot memory geometry. It has no
 HAL dependency and is intentionally host-testable. Concrete SoC facts live
 here instead of in domain projects such as FiBeWI.
+
+### `espbewi-boot`
+
+Low-level second-stage boot hardware primitives: ROM flash access, flash-size
+setup, watchdog handoff and cache/MMU mapping. It deliberately contains no
+EWBT, rollback or slot-selection policy.
 
 ## Boundary
 
