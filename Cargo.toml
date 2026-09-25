@@ -4,6 +4,7 @@ members = [
   "crates/flash",
   "crates/nvs",
   "crates/partitions",
+  "crates/platform",
 ]
 
 [workspace.package]
