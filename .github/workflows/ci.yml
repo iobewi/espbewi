@@ -16,6 +16,8 @@ jobs:
           components: clippy
       - run: cargo check -p espbewi-platform
       - run: cargo clippy -p espbewi-platform -- -D warnings
+      - run: cargo check -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
       - run: cargo check -p espbewi-flash --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-flash --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
       - run: cargo check -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf
