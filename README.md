@@ -52,7 +52,7 @@ Domain projects remain responsible for their own semantics:
 
 ## Targets
 
-Initial validated target:
+Initial CI-gated target:
 
 - ESP32-C3
 
