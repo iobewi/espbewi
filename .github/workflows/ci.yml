@@ -1,0 +1,22 @@
+name: Rust
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  esp32c3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
+      - run: cargo check -p espbewi-flash --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-flash --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+      - run: cargo check -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+      - run: cargo check -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
