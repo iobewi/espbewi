@@ -1,0 +1,13 @@
+/workspaces/espbewi/target/xtensa-esp32s3-none-elf/debug/deps/embedded_hal-67ce1a222d9baddb.d: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/delay.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/digital.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/i2c.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/pwm.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/spi.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/../README.md /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/i2c-shared-bus.svg /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/spi-shared-bus.svg
+
+/workspaces/espbewi/target/xtensa-esp32s3-none-elf/debug/deps/libembedded_hal-67ce1a222d9baddb.rmeta: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/delay.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/digital.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/i2c.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/pwm.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/spi.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/../README.md /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/i2c-shared-bus.svg /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/spi-shared-bus.svg
+
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/lib.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/delay.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/digital.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/i2c.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/pwm.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/spi.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/../README.md:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/i2c-shared-bus.svg:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/embedded-hal-1.0.0/src/spi-shared-bus.svg:

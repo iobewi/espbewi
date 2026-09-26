@@ -12,6 +12,7 @@ categories = ["embedded", "hardware-support", "no-std"]
 [features]
 default = []
 esp32c3 = []
+esp32s3 = []
 
 [dependencies]
 espbewi-platform = { path = "../platform" }

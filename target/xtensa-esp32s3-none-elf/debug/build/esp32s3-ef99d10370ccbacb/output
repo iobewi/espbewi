@@ -1,0 +1,3 @@
+cargo:rustc-link-search=/workspaces/espbewi/target/xtensa-esp32s3-none-elf/debug/build/esp32s3-ef99d10370ccbacb/out
+cargo:rerun-if-changed=device.x
+cargo:rerun-if-changed=build.rs
