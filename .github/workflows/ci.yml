@@ -24,3 +24,5 @@ jobs:
       - run: cargo clippy -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
       - run: cargo check -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+      - run: cargo check -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
