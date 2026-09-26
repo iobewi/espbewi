@@ -24,3 +24,15 @@ jobs:
       - run: cargo clippy -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
       - run: cargo check -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+      - run: cargo check -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  bootloader-esp32c3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: riscv32imc-unknown-none-elf
+          components: rust-src
+      - run: cd bootloader/esp && cargo check --release --locked --features esp32c3 --target riscv32imc-unknown-none-elf

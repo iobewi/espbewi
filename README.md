@@ -15,6 +15,8 @@ ESP hardware / HAL
        +-- espbewi-partitions
        +-- espbewi-platform
        +-- espbewi-boot
+       +-- espbewi-ota
+       +-- bootloader/esp
        |
        +-- future: wifi / tls / time / rng
 ```
@@ -44,6 +46,12 @@ Policy-free ESP-IDF partition-table lookup and bounded raw erase helpers.
 
 It contains no OTA slot-selection, rollback or firmware transaction semantics.
 
+### `espbewi-ota`
+
+Concrete ESP partition/NOR-flash adapter for `fibewi::ArtifactStorage`.
+It owns ESP slot lookup, erase geometry and physical artifact writes while
+FiBeWI keeps transactional OTA policy and restart-safe reconciliation.
+
 ### `espbewi-platform`
 
 Pure hardware descriptors such as chip IDs and boot memory geometry. It has no
@@ -55,6 +63,12 @@ here instead of in domain projects such as FiBeWI.
 Low-level second-stage boot hardware primitives: ROM flash access, flash-size
 setup, watchdog handoff and cache/MMU mapping. It deliberately contains no
 EWBT, rollback or slot-selection policy.
+
+### `bootloader/esp`
+
+The ESP second-stage executable. It owns the HAL runtime, linker layout,
+ROM/MMU/watchdog execution and final jump, and consumes `fibewi::boot`
+for EWBT/A-B/rollback decisions.
 
 ## Boundary
 
@@ -70,8 +84,8 @@ Initial CI-gated target:
 
 - ESP32-C3
 
-Feature scaffolding is also provided for ESP32-S3; target-specific validation
-will be added as that hardware path is brought up.
+ESP32-S3 platform and bootloader support is also present. The C3 path remains
+the CI-gated baseline while S3 target validation continues separately.
 
 ## License
 
