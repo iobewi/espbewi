@@ -1,0 +1,13 @@
+/workspaces/espbewi/target/xtensa-esp32s3-none-elf/debug/deps/esp_rom_sys-863f5f6ae2ba95b3.d: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/reg_access.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/crc.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/md5.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/spiflash.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/syscall/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/syscall/v1.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/../README.md
+
+/workspaces/espbewi/target/xtensa-esp32s3-none-elf/debug/deps/libesp_rom_sys-863f5f6ae2ba95b3.rmeta: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/reg_access.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/crc.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/md5.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/spiflash.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/syscall/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/syscall/v1.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/../README.md
+
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/lib.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/reg_access.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/mod.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/crc.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/md5.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/rom/spiflash.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/syscall/mod.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/syscall/v1.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-rom-sys-0.1.4/src/../README.md:

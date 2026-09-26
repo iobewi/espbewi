@@ -1,0 +1,12 @@
+/workspaces/espbewi/target/debug/deps/esp_config-5331756d35ef6dc8.d: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/markdown.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/validator.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/value.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/../README.md
+
+/workspaces/espbewi/target/debug/deps/libesp_config-5331756d35ef6dc8.rlib: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/markdown.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/validator.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/value.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/../README.md
+
+/workspaces/espbewi/target/debug/deps/libesp_config-5331756d35ef6dc8.rmeta: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/mod.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/markdown.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/validator.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/value.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/../README.md
+
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/lib.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/mod.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/markdown.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/validator.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/generate/value.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-config-0.7.0/src/../README.md:

@@ -1,0 +1,11 @@
+/workspaces/espbewi/target/debug/build/xtensa-lx-rt-7382730369185b89/build_script_build-7382730369185b89.d: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/build.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32s2.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32s3.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/xtensa.in.x /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/interrupt_level_masks.rs.template /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/exception-esp32.x.template
+
+/workspaces/espbewi/target/debug/build/xtensa-lx-rt-7382730369185b89/build_script_build-7382730369185b89: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/build.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32s2.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32s3.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/xtensa.in.x /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/interrupt_level_masks.rs.template /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/exception-esp32.x.template
+
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/build.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32s2.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/config/esp32s3.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/xtensa.in.x:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/interrupt_level_masks.rs.template:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xtensa-lx-rt-0.22.0/exception-esp32.x.template:

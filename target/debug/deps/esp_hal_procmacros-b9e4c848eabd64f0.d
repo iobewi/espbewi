@@ -1,0 +1,12 @@
+/workspaces/espbewi/target/debug/deps/esp_hal_procmacros-b9e4c848eabd64f0.d: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/alert.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/blocking.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/builder.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/doc_replace.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/interrupt.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/ram.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/rtos_main.rs
+
+/workspaces/espbewi/target/debug/deps/libesp_hal_procmacros-b9e4c848eabd64f0.so: /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/lib.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/alert.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/blocking.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/builder.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/doc_replace.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/interrupt.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/ram.rs /opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/rtos_main.rs
+
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/lib.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/alert.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/blocking.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/builder.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/doc_replace.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/interrupt.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/ram.rs:
+/opt/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/esp-hal-procmacros-0.22.0/src/rtos_main.rs:
