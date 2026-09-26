@@ -33,4 +33,4 @@ jobs:
         with:
           targets: riscv32imc-unknown-none-elf
           components: rust-src
-      - run: cd bootloader/esp && cargo check --release --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cd bootloader/esp && cargo check --release --locked --features esp32c3 --target riscv32imc-unknown-none-elf
