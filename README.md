@@ -15,6 +15,7 @@ ESP hardware / HAL
        +-- espbewi-partitions
        +-- espbewi-platform
        +-- espbewi-boot
+       +-- bootloader/esp
        |
        +-- future: wifi / tls / time / rng
 ```
@@ -55,6 +56,12 @@ here instead of in domain projects such as FiBeWI.
 Low-level second-stage boot hardware primitives: ROM flash access, flash-size
 setup, watchdog handoff and cache/MMU mapping. It deliberately contains no
 EWBT, rollback or slot-selection policy.
+
+### `bootloader/esp`
+
+The ESP second-stage executable. It owns the HAL runtime, linker layout,
+ROM/MMU/watchdog execution and final jump, and consumes `fibewi-esp::boot`
+for EWBT/A-B/rollback decisions.
 
 ## Boundary
 
