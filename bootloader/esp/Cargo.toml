@@ -1,0 +1,41 @@
+[workspace]
+
+[package]
+edition = "2024"
+name = "espbewi-bootloader"
+rust-version = "1.88"
+version = "0.1.0"
+license = "MIT"
+description = "ESP second-stage bootloader executor using FiBeWI lifecycle semantics"
+
+[[bin]]
+name = "espbewi-bootloader"
+path = "src/main.rs"
+
+[features]
+default = []
+esp32c3 = [
+  "esp-hal/esp32c3",
+  "esp-hal/rt",
+  "esp-println/esp32c3",
+  "esp-println/jtag-serial",
+  "espbewi-boot/esp32c3",
+]
+
+[dependencies]
+esp-hal = { version = "~1.1.0", default-features = false }
+esp-println = { version = "0.17.0", default-features = false }
+espbewi-boot = { path = "../../crates/boot", default-features = false }
+espbewi-platform = { path = "../../crates/platform" }
+fibewi-esp = { git = "https://github.com/iobewi/fibewi", rev = "9aef81db5148ebe06fa3db4adb3879e58e8cdc94", package = "fibewi-esp" }
+
+[profile.dev]
+opt-level = "s"
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+opt-level = "s"
+panic = "abort"
+debug = 2
+overflow-checks = false
