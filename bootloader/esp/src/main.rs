@@ -320,13 +320,13 @@ fn load(layout: &Layout, slot: u8) -> Result<core::convert::Infallible, BootErro
     // Flash MMU + cache for the DROM/IROM segments.
     let autoload = hw::cache_begin_mapping();
     for seg in image.segments().iter().filter(|s| s.len > 0) {
-        let is_drom = MAP.drom.contains(&seg.load);
-        if !(is_drom || MAP.irom.contains(&seg.load)) {
+        let is_drom = map.drom.contains(&seg.load);
+        if !(is_drom || map.irom.contains(&seg.load)) {
             continue;
         }
-        let vaddr = seg.load & !(MAP.mmu_page - 1);
-        let paddr = seg.data_offset & !(MAP.mmu_page - 1);
-        let pages = (seg.len + (seg.load - vaddr)).div_ceil(MAP.mmu_page);
+        let vaddr = seg.load & !(map.mmu_page - 1);
+        let paddr = seg.data_offset & !(map.mmu_page - 1);
+        let pages = (seg.len + (seg.load - vaddr)).div_ceil(map.mmu_page);
         let rc = if is_drom {
             hw::map_drom(vaddr, paddr, pages)
         } else {
