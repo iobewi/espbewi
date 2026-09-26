@@ -21,6 +21,13 @@ esp32c3 = [
   "esp-println/jtag-serial",
   "espbewi-boot/esp32c3",
 ]
+esp32s3 = [
+  "esp-hal/esp32s3",
+  "esp-hal/rt",
+  "esp-println/esp32s3",
+  "esp-println/jtag-serial",
+  "espbewi-boot/esp32s3",
+]
 
 [dependencies]
 esp-hal = { version = "~1.1.0", default-features = false }

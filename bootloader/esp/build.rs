@@ -3,6 +3,8 @@ fn main() {
 
     let linker = if std::env::var_os("CARGO_FEATURE_ESP32C3").is_some() {
         "espbewi-boot-esp32c3.x"
+    } else if std::env::var_os("CARGO_FEATURE_ESP32S3").is_some() {
+        "espbewi-boot-esp32s3.x"
     } else {
         panic!("no supported ESP boot target feature selected");
     };
