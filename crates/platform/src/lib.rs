@@ -80,8 +80,14 @@ pub mod chips {
         /// image chip-id. `sram_alias_offset` is `SOC_I_D_OFFSET` from
         /// esp-idf's `soc/esp32s3/include/soc/soc.h`.
         ///
-        /// `boot_window` must stay consistent with
-        /// `bootloader/esp/linker/espbewi-boot-esp32s3.x`.
+        /// `boot_window` must stay consistent with the concrete bootloader
+        /// linker script (`fibewi`'s `bootloader/esp32c3/boot-esp32s3.x` at
+        /// the time of writing). Deliberately generous: a first hardware
+        /// test with a straight C3-sized reservation (0x9000/0x8000)
+        /// panicked with a corrupted panic location, consistent with
+        /// Xtensa's windowed-register spill overflowing a stack sized for
+        /// RISC-V's flat register file. S3 has ample spare SRAM for this
+        /// corner, so there is no cost to sizing it generously.
         pub const BOOT_MEMORY_MAP: MemoryMap = MemoryMap {
             chip_id: 0x0009,
             drom: 0x3C00_0000..0x3D00_0000,
@@ -90,7 +96,7 @@ pub mod chips {
             dram: 0x3FC8_8000..0x3FD0_0000,
             rtc: 0x600F_E000..0x6010_0000,
             sram_alias_offset: 0x006F_0000,
-            boot_window: 0x3FCD_B000..0x3FD0_0000,
+            boot_window: 0x3FCC_8000..0x3FD0_0000,
             mmu_page: 0x1_0000,
         };
     }
