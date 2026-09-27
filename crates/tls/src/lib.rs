@@ -346,13 +346,14 @@ pub fn generate_self_signed_identity(
             return Err(IdentityGenerationError::PsaInit(rc));
         }
 
-        // PSA attributes come from bindgen. Keep the generated default as the
-        // canonical zero-initialization, then set the documented fields we own.
-        #[allow(clippy::field_reassign_with_default)]
-        let mut attributes = psa_key_attributes_t::default();
-        attributes.private_type = KEY_TYPE;
-        attributes.private_bits = 256;
-        attributes.private_lifetime = 0; // PSA_KEY_LIFETIME_VOLATILE
+        // PSA attributes come from bindgen. Initialize the fields we own
+        // directly and leave every other generated field at its zero default.
+        let mut attributes = psa_key_attributes_t {
+            private_type: KEY_TYPE,
+            private_bits: 256,
+            private_lifetime: 0, // PSA_KEY_LIFETIME_VOLATILE
+            ..Default::default()
+        };
         // Export is the only policy needed here: the PSA key is copied into
         // a normal MbedTLS PK context immediately below, after which signing
         // the self-signed certificate no longer depends on the PSA policy.
