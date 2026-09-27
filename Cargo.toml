@@ -7,6 +7,7 @@ members = [
   "hardware/platform",
   "hardware/boot",
   "adapters/ota",
+  "adapters/config-space",
   "services/wifi",
   "services/tls",
 ]
