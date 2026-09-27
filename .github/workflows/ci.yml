@@ -14,6 +14,7 @@ jobs:
       nvs: ${{ steps.filter.outputs.nvs }}
       partitions: ${{ steps.filter.outputs.partitions }}
       ota: ${{ steps.filter.outputs.ota }}
+      config_space: ${{ steps.filter.outputs.config_space }}
       bootloader: ${{ steps.filter.outputs.bootloader }}
       wifi: ${{ steps.filter.outputs.wifi }}
       tls: ${{ steps.filter.outputs.tls }}
@@ -34,6 +35,7 @@ jobs:
             [nvs]=false
             [partitions]=false
             [ota]=false
+            [config_space]=false
             [bootloader]=false
             [wifi]=false
             [tls]=false
@@ -78,9 +80,11 @@ jobs:
                 hardware/flash/*)
                   run[flash]=true
                   run[nvs]=true
+                  run[config_space]=true
                   ;;
                 hardware/nvs/*)
                   run[nvs]=true
+                  run[config_space]=true
                   ;;
                 hardware/partitions/*)
                   run[partitions]=true
@@ -88,6 +92,9 @@ jobs:
                   ;;
                 adapters/ota/*)
                   run[ota]=true
+                  ;;
+                adapters/config-space/*)
+                  run[config_space]=true
                   ;;
                 bootloader/esp/*)
                   run[bootloader]=true
@@ -102,7 +109,7 @@ jobs:
             done
           fi
 
-          for key in platform boot flash nvs partitions ota bootloader wifi tls; do
+          for key in platform boot flash nvs partitions ota config_space bootloader wifi tls; do
             echo "$key=${run[$key]}" >> "$GITHUB_OUTPUT"
           done
 
@@ -189,6 +196,20 @@ jobs:
           components: clippy
       - run: cargo check -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  config-space-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.config_space == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
+      - run: cargo check -p espbewi-config-space --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-config-space --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
 
   bootloader-esp32c3:
     needs: changes
