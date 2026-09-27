@@ -48,3 +48,27 @@ jobs:
           components: clippy
       - run: cargo check -p espbewi-wifi --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-wifi --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  tls-esp32c3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: riscv32imc-unknown-none-elf
+          components: rust-src, clippy
+      - run: cargo check -p espbewi-tls --features esp32c3,picoserve --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-tls --features esp32c3,picoserve --target riscv32imc-unknown-none-elf -- -D warnings
+
+  tls-esp32s3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: esp-rs/xtensa-toolchain@v1.6
+        with:
+          default: true
+          buildtargets: esp32s3
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src, clippy
+      - run: cargo +nightly check -p espbewi-tls --features esp32s3,picoserve -Z build-std=core,alloc --target xtensa-esp32s3-none-elf
