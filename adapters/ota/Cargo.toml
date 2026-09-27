@@ -24,4 +24,4 @@ esp32s3 = [
 fibewi = { git = "https://github.com/iobewi/fibewi", rev = "13ebee5000d4c7653382cf4e1c7395a3eb74153f", default-features = false, features = ["engine"] }
 embedded-storage = "0.3.1"
 esp-bootloader-esp-idf = { version = "=0.5.0", default-features = false }
-espbewi-partitions = { path = "../partitions", default-features = false }
+espbewi-partitions = { path = "../../hardware/partitions", default-features = false }

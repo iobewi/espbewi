@@ -1,14 +1,14 @@
 [workspace]
 resolver = "2"
 members = [
-  "crates/flash",
-  "crates/nvs",
-  "crates/partitions",
-  "crates/platform",
-  "crates/boot",
-  "crates/ota",
-  "crates/wifi",
-  "crates/tls",
+  "hardware/flash",
+  "hardware/nvs",
+  "hardware/partitions",
+  "hardware/platform",
+  "hardware/boot",
+  "adapters/ota",
+  "services/wifi",
+  "services/tls",
 ]
 
 [workspace.package]

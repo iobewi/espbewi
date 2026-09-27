@@ -66,36 +66,36 @@ jobs:
                 Cargo.toml|Cargo.lock|.github/workflows/ci.yml)
                   mark_all
                   ;;
-                crates/platform/*)
+                hardware/platform/*)
                   run[platform]=true
                   run[boot]=true
                   run[bootloader]=true
                   ;;
-                crates/boot/*)
+                hardware/boot/*)
                   run[boot]=true
                   run[bootloader]=true
                   ;;
-                crates/flash/*)
+                hardware/flash/*)
                   run[flash]=true
                   run[nvs]=true
                   ;;
-                crates/nvs/*)
+                hardware/nvs/*)
                   run[nvs]=true
                   ;;
-                crates/partitions/*)
+                hardware/partitions/*)
                   run[partitions]=true
                   run[ota]=true
                   ;;
-                crates/ota/*)
+                adapters/ota/*)
                   run[ota]=true
                   ;;
                 bootloader/esp/*)
                   run[bootloader]=true
                   ;;
-                crates/wifi/*)
+                services/wifi/*)
                   run[wifi]=true
                   ;;
-                crates/tls/*)
+                services/tls/*)
                   run[tls]=true
                   ;;
               esac

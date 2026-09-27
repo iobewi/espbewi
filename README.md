@@ -2,29 +2,42 @@
 
 Atomic `no_std` ESP platform workspace for the IOBEWI / Embewi ecosystem.
 
-`espbewi` centralizes ESP-specific hardware integration while keeping domain
+`espbewi` centralizes ESP-specific implementation while keeping generic domain
 semantics in their own projects.
 
+The repository is organized by responsibility:
+
 ```text
-ESP hardware / HAL
-       |
-     espbewi
-       |
-       +-- espbewi-flash
-       +-- espbewi-nvs
-       +-- espbewi-partitions
-       +-- espbewi-platform
-       +-- espbewi-boot
-       +-- espbewi-ota
-       +-- bootloader/esp
-       |
-       +-- future: wifi / tls / time / rng
+espbewi/
+├── hardware/
+│   ├── platform
+│   ├── flash
+│   ├── nvs
+│   ├── partitions
+│   └── boot
+├── adapters/
+│   └── ota
+├── services/
+│   ├── wifi
+│   └── tls
+└── bootloader/
+    └── esp
 ```
 
-The repository is a workspace, **not** one monolithic crate. Consumers depend
-only on the hardware capability they need.
+- `hardware/` contains policy-free ESP hardware/platform primitives.
+- `adapters/` implements generic external domain contracts on ESP.
+- `services/` provides reusable ESP-facing services above the raw hardware layer.
+- `bootloader/` contains executable artifacts rather than reusable library crates.
 
-## Current crates
+Package names remain stable; the directory hierarchy expresses ownership and
+dependency direction.
+
+## Hardware
+
+### `espbewi-platform`
+
+Pure hardware descriptors such as chip IDs and boot memory geometry. It has no
+HAL dependency and is intentionally host-testable.
 
 ### `espbewi-flash`
 
@@ -46,23 +59,31 @@ Policy-free ESP-IDF partition-table lookup and bounded raw erase helpers.
 
 It contains no OTA slot-selection, rollback or firmware transaction semantics.
 
+### `espbewi-boot`
+
+Low-level second-stage boot hardware primitives: ROM flash access, flash-size
+setup, watchdog handoff and cache/MMU mapping. It deliberately contains no
+EWBT, rollback or slot-selection policy.
+
+## Adapters
+
 ### `espbewi-ota`
 
 Concrete ESP partition/NOR-flash adapter for `fibewi::ArtifactStorage`.
 It owns ESP slot lookup, erase geometry and physical artifact writes while
 FiBeWI keeps transactional OTA policy and restart-safe reconciliation.
 
-### `espbewi-platform`
+## Services
 
-Pure hardware descriptors such as chip IDs and boot memory geometry. It has no
-HAL dependency and is intentionally host-testable. Concrete SoC facts live
-here instead of in domain projects such as FiBeWI.
+### `espbewi-wifi`
 
-### `espbewi-boot`
+Reusable ESP Wi-Fi station integration for esp-radio and Embassy networking.
 
-Low-level second-stage boot hardware primitives: ROM flash access, flash-size
-setup, watchdog handoff and cache/MMU mapping. It deliberately contains no
-EWBT, rollback or slot-selection policy.
+### `espbewi-tls`
+
+Reusable ESP HAL / MbedTLS integration with Embassy networking adapters.
+
+## Executables
 
 ### `bootloader/esp`
 
@@ -70,22 +91,35 @@ The ESP second-stage executable. It owns the HAL runtime, linker layout,
 ROM/MMU/watchdog execution and final jump, and consumes `fibewi::boot`
 for EWBT/A-B/rollback decisions.
 
-## Boundary
+## Dependency direction
+
+```text
+generic domains
+      ↑
+   adapters
+      ↑
+hardware/platform
+
+services
+   ↑
+hardware/platform
+```
+
+Hardware crates never depend on adapters or services.
 
 Domain projects remain responsible for their own semantics:
 
-- `config-space-manager`: ConfigSpace ownership, quotas, generations and framing;
+- `config-space-manager`: ConfigSpace ownership, quotas and generations;
 - FiBeWI: firmware transactions, EWBT, A/B decisions and rollback;
 - applications: provisioning, HTTP/TLS policy, identity and product behavior.
 
 ## Targets
 
-Initial CI-gated target:
+CI-gated target:
 
 - ESP32-C3
 
-ESP32-S3 platform and bootloader support is also present. The C3 path remains
-the CI-gated baseline while S3 target validation continues separately.
+ESP32-S3 platform, TLS and bootloader support are also present.
 
 ## License
 
