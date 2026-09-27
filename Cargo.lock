@@ -721,6 +721,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "espbewi-ota"
+version = "0.1.0"
+dependencies = [
+ "embedded-storage",
+ "esp-bootloader-esp-idf",
+ "espbewi-partitions",
+ "fibewi",
+]
+
+[[package]]
 name = "espbewi-partitions"
 version = "0.1.0"
 dependencies = [
@@ -732,6 +742,14 @@ dependencies = [
 [[package]]
 name = "espbewi-platform"
 version = "0.1.0"
+
+[[package]]
+name = "fibewi"
+version = "0.1.0"
+source = "git+https://github.com/iobewi/fibewi?rev=13ebee5000d4c7653382cf4e1c7395a3eb74153f#13ebee5000d4c7653382cf4e1c7395a3eb74153f"
+dependencies = [
+ "sha2",
+]
 
 [[package]]
 name = "fnv"
