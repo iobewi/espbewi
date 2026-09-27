@@ -16,7 +16,8 @@ espbewi/
 │   ├── partitions
 │   └── boot
 ├── adapters/
-│   └── ota
+│   ├── ota
+│   └── config-space
 ├── services/
 │   ├── wifi
 │   └── tls
@@ -73,7 +74,14 @@ Concrete ESP partition/NOR-flash adapter for `fibewi::ArtifactStorage`.
 It owns ESP slot lookup, erase geometry and physical artifact writes while
 FiBeWI keeps transactional OTA policy and restart-safe reconciliation.
 
+### `espbewi-config-space`
+
+Concrete ESP/NVS implementation of `config_space_manager::ConfigBackend`.
+It owns ConfigSpace record framing, NVS capacity accounting and backend health
+checks while `config-space-manager` remains hardware-agnostic.
+
 ## Services
+
 
 ### `espbewi-wifi`
 
