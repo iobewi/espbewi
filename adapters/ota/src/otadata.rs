@@ -139,12 +139,12 @@ fn execute<F: Storage + NorFlash>(
     if back != boot::BLANK { return Err(Error::Verify); }
 
     let boot::Op::Program { offset, len, data, .. } = body else { return Err(Error::Verify) };
-    flash.write(base + u32::from(offset), &data[..usize::from(len)]).map_err(|_| Error::Verify)?;
+    NorFlash::write(flash, base + u32::from(offset), &data[..usize::from(len)]).map_err(|_| Error::Verify)?;
     ReadNorFlash::read(flash, base, &mut back).map_err(|_| Error::Verify)?;
     if back != write.entry.body() { return Err(Error::Verify); }
 
     let boot::Op::Program { offset, len, data, .. } = commit else { return Err(Error::Verify) };
-    flash.write(base + u32::from(offset), &data[..usize::from(len)]).map_err(|_| Error::Verify)?;
+    NorFlash::write(flash, base + u32::from(offset), &data[..usize::from(len)]).map_err(|_| Error::Verify)?;
     ReadNorFlash::read(flash, base, &mut back).map_err(|_| Error::Verify)?;
     if back != write.entry.encode() || boot::decode(&back) != Decoded::Ok(write.entry) {
         return Err(Error::Verify);
