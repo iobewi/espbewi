@@ -25,6 +25,8 @@ use espbewi_partitions::{
     PartitionRange, erase_range as erase_raw_partition_range, find as find_partition,
 };
 
+pub mod otadata;
+
 /// Scratch size required by the ESP-IDF partition table parser.
 pub const PARTITION_TABLE_BUFFER_SIZE: usize = PARTITION_TABLE_MAX_LEN;
 
