@@ -34,7 +34,7 @@ esp-hal = { version = "~1.1.0", default-features = false }
 esp-println = { version = "0.17.0", default-features = false }
 espbewi-boot = { path = "../../crates/boot", default-features = false }
 espbewi-platform = { path = "../../crates/platform" }
-fibewi = { git = "https://github.com/iobewi/fibewi", rev = "4191ce71bead04c69c1f83e20a55742f01b65424" }
+fibewi = { git = "https://github.com/iobewi/fibewi", rev = "13ebee5000d4c7653382cf4e1c7395a3eb74153f", default-features = false, features = ["boot"] }
 
 [profile.dev]
 opt-level = "s"
