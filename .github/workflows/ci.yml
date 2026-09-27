@@ -45,5 +45,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
         with:
           targets: riscv32imc-unknown-none-elf
+          components: clippy
       - run: cargo check -p espbewi-wifi --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-wifi --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
