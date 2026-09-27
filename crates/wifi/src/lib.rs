@@ -100,7 +100,7 @@ impl<const SOCKETS: usize> WifiManager<SOCKETS> {
             }
 
             let resources = self.resources.take()?;
-            let seed = esp_hal::time::Instant::now().duration_since_epoch().as_micros() as u64;
+            let seed = esp_hal::time::Instant::now().duration_since_epoch().as_micros();
             let (stack, runner) = embassy_net::new(
                 interfaces.station,
                 embassy_net::Config::dhcpv4(Default::default()),
