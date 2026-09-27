@@ -5,7 +5,124 @@ on:
   pull_request:
 
 jobs:
-  esp32c3:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      platform: ${{ steps.filter.outputs.platform }}
+      boot: ${{ steps.filter.outputs.boot }}
+      flash: ${{ steps.filter.outputs.flash }}
+      nvs: ${{ steps.filter.outputs.nvs }}
+      partitions: ${{ steps.filter.outputs.partitions }}
+      ota: ${{ steps.filter.outputs.ota }}
+      bootloader: ${{ steps.filter.outputs.bootloader }}
+      wifi: ${{ steps.filter.outputs.wifi }}
+      tls: ${{ steps.filter.outputs.tls }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: filter
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          declare -A run=(
+            [platform]=false
+            [boot]=false
+            [flash]=false
+            [nvs]=false
+            [partitions]=false
+            [ota]=false
+            [bootloader]=false
+            [wifi]=false
+            [tls]=false
+          )
+
+          mark_all() {
+            for key in "${!run[@]}"; do
+              run[$key]=true
+            done
+          }
+
+          # main is the integration gate: always run the complete CI there.
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            mark_all
+          else
+            if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+              base="${{ github.event.pull_request.base.sha }}"
+            else
+              base="${{ github.event.before }}"
+              if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
+                git fetch origin main
+                base="$(git merge-base HEAD origin/main)"
+              fi
+            fi
+
+            mapfile -t files < <(git diff --name-only "$base" HEAD)
+
+            for file in "${files[@]}"; do
+              case "$file" in
+                Cargo.toml|Cargo.lock|.github/workflows/ci.yml)
+                  mark_all
+                  ;;
+                crates/platform/*)
+                  run[platform]=true
+                  run[boot]=true
+                  run[bootloader]=true
+                  ;;
+                crates/boot/*)
+                  run[boot]=true
+                  run[bootloader]=true
+                  ;;
+                crates/flash/*)
+                  run[flash]=true
+                  run[nvs]=true
+                  ;;
+                crates/nvs/*)
+                  run[nvs]=true
+                  ;;
+                crates/partitions/*)
+                  run[partitions]=true
+                  run[ota]=true
+                  ;;
+                crates/ota/*)
+                  run[ota]=true
+                  ;;
+                bootloader/esp/*)
+                  run[bootloader]=true
+                  ;;
+                crates/wifi/*)
+                  run[wifi]=true
+                  ;;
+                crates/tls/*)
+                  run[tls]=true
+                  ;;
+              esac
+            done
+          fi
+
+          for key in platform boot flash nvs partitions ota bootloader wifi tls; do
+            echo "$key=${run[$key]}" >> "$GITHUB_OUTPUT"
+          done
+
+  platform:
+    needs: changes
+    if: needs.changes.outputs.platform == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          components: clippy
+      - run: cargo metadata --locked --no-deps > /dev/null
+      - run: cargo check -p espbewi-platform
+      - run: cargo clippy -p espbewi-platform -- -D warnings
+
+  boot-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.boot == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,21 +131,68 @@ jobs:
           toolchain: "1.88.0"
           targets: riscv32imc-unknown-none-elf
           components: clippy
-      - run: cargo metadata --locked --no-deps > /dev/null
-      - run: cargo check -p espbewi-platform
-      - run: cargo clippy -p espbewi-platform -- -D warnings
       - run: cargo check -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  flash-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.flash == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
       - run: cargo check -p espbewi-flash --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-flash --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  nvs-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.nvs == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
       - run: cargo check -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-nvs --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  partitions-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.partitions == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
       - run: cargo check -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-partitions --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  ota-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.ota == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
       - run: cargo check -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-ota --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
 
   bootloader-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.bootloader == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,6 +203,8 @@ jobs:
       - run: cd bootloader/esp && cargo check --release --locked --features esp32c3 --target riscv32imc-unknown-none-elf
 
   wifi-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.wifi == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +216,8 @@ jobs:
       - run: cargo clippy -p espbewi-wifi --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
 
   tls-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.tls == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -61,6 +229,8 @@ jobs:
       - run: cargo clippy -p espbewi-tls --features esp32c3,picoserve --target riscv32imc-unknown-none-elf -- -D warnings
 
   tls-esp32s3:
+    needs: changes
+    if: needs.changes.outputs.tls == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
