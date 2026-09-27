@@ -346,6 +346,9 @@ pub fn generate_self_signed_identity(
             return Err(IdentityGenerationError::PsaInit(rc));
         }
 
+        // PSA attributes come from bindgen. Keep the generated default as the
+        // canonical zero-initialization, then set the documented fields we own.
+        #[allow(clippy::field_reassign_with_default)]
         let mut attributes = psa_key_attributes_t::default();
         attributes.private_type = KEY_TYPE;
         attributes.private_bits = 256;
@@ -370,7 +373,7 @@ pub fn generate_self_signed_identity(
         }
 
         mbedtls_x509write_crt_init(&mut *ctx.crt);
-        let mut setup = |rc: i32| {
+        let setup = |rc: i32| {
             if rc == 0 {
                 Ok(())
             } else {
@@ -451,13 +454,32 @@ pub fn generate_self_signed_identity(
     }
 }
 
+/// Failure while constructing a server-side TLS configuration.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ServerConfigError {
+    InvalidCertificatePem,
+    InvalidPrivateKeyPem,
+    InvalidCertificate,
+    InvalidPrivateKey,
+}
+
 /// Builds a server-side MbedTLS session configuration from a PEM pair.
-pub fn server_config_from_pem(cert_pem: &str, key_pem: &str) -> Result<SessionConfig<'static>, ()> {
-    let cert_c = CString::new(cert_pem).map_err(|_| ())?;
-    let key_c = CString::new(key_pem).map_err(|_| ())?;
-    let certificate = Certificate::new(X509::PEM(&cert_c)).map_err(|_| ())?;
-    let private_key = PrivateKey::new(X509::PEM(&key_c), None).map_err(|_| ())?;
-    Ok(SessionConfig::Server(ServerSessionConfig::new(Credentials { certificate, private_key })))
+pub fn server_config_from_pem(
+    cert_pem: &str,
+    key_pem: &str,
+) -> Result<SessionConfig<'static>, ServerConfigError> {
+    let cert_c =
+        CString::new(cert_pem).map_err(|_| ServerConfigError::InvalidCertificatePem)?;
+    let key_c =
+        CString::new(key_pem).map_err(|_| ServerConfigError::InvalidPrivateKeyPem)?;
+    let certificate = Certificate::new(X509::PEM(&cert_c))
+        .map_err(|_| ServerConfigError::InvalidCertificate)?;
+    let private_key = PrivateKey::new(X509::PEM(&key_c), None)
+        .map_err(|_| ServerConfigError::InvalidPrivateKey)?;
+    Ok(SessionConfig::Server(ServerSessionConfig::new(Credentials {
+        certificate,
+        private_key,
+    })))
 }
 
 /// Verifies that a CA PEM parses as an X.509 certificate.
