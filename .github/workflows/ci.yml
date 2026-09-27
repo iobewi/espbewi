@@ -14,6 +14,7 @@ jobs:
           toolchain: "1.88.0"
           targets: riscv32imc-unknown-none-elf
           components: clippy
+      - run: cargo metadata --locked --no-deps > /dev/null
       - run: cargo check -p espbewi-platform
       - run: cargo clippy -p espbewi-platform -- -D warnings
       - run: cargo check -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf
