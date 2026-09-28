@@ -588,7 +588,7 @@ version = "0.1.0"
 [[package]]
 name = "fibewi"
 version = "0.1.0"
-source = "git+https://github.com/iobewi/fibewi?rev=80b218f34b6c5e0d6dcd68333315ec508d56a5bb#80b218f34b6c5e0d6dcd68333315ec508d56a5bb"
+source = "git+https://github.com/iobewi/fibewi?rev=49a40c93637f625bc27e97a634d596bfab761247#49a40c93637f625bc27e97a634d596bfab761247"
 dependencies = [
  "sha2",
 ]
