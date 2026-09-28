@@ -1495,6 +1495,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "espbewi-watchdog"
+version = "0.1.0"
+dependencies = [
+ "esp-hal",
+]
+
+[[package]]
 name = "espbewi-wifi"
 version = "0.1.0"
 dependencies = [

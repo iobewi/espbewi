@@ -66,6 +66,12 @@ Low-level second-stage boot hardware primitives: ROM flash access, flash-size
 setup, watchdog handoff and cache/MMU mapping. It deliberately contains no
 EWBT, rollback or slot-selection policy.
 
+### `espbewi-watchdog`
+
+TIMG0 watchdog hardware controls for application startup. The caller owns the
+deadline and decides when a boot is safe to confirm; this crate only arms,
+feeds and disables the watchdog.
+
 ## Adapters
 
 ### `espbewi-ota`

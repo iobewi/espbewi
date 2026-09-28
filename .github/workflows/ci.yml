@@ -2,7 +2,6 @@ name: Rust
 
 on:
   push:
-  pull_request:
 
 jobs:
   changes:
@@ -10,6 +9,7 @@ jobs:
     outputs:
       platform: ${{ steps.filter.outputs.platform }}
       boot: ${{ steps.filter.outputs.boot }}
+      watchdog: ${{ steps.filter.outputs.watchdog }}
       flash: ${{ steps.filter.outputs.flash }}
       nvs: ${{ steps.filter.outputs.nvs }}
       partitions: ${{ steps.filter.outputs.partitions }}
@@ -31,6 +31,7 @@ jobs:
           declare -A run=(
             [platform]=false
             [boot]=false
+            [watchdog]=false
             [flash]=false
             [nvs]=false
             [partitions]=false
@@ -51,14 +52,10 @@ jobs:
           if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
             mark_all
           else
-            if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-              base="${{ github.event.pull_request.base.sha }}"
-            else
-              base="${{ github.event.before }}"
-              if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
-                git fetch origin main
-                base="$(git merge-base HEAD origin/main)"
-              fi
+            base="${{ github.event.before }}"
+            if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
+              git fetch origin main
+              base="$(git merge-base HEAD origin/main)"
             fi
 
             mapfile -t files < <(git diff --name-only "$base" HEAD)
@@ -76,6 +73,9 @@ jobs:
                 hardware/boot/*)
                   run[boot]=true
                   run[bootloader]=true
+                  ;;
+                hardware/watchdog/*)
+                  run[watchdog]=true
                   ;;
                 hardware/flash/*)
                   run[flash]=true
@@ -109,7 +109,7 @@ jobs:
             done
           fi
 
-          for key in platform boot flash nvs partitions ota config_space bootloader wifi tls; do
+          for key in platform boot watchdog flash nvs partitions ota config_space bootloader wifi tls; do
             echo "$key=${run[$key]}" >> "$GITHUB_OUTPUT"
           done
 
@@ -140,6 +140,20 @@ jobs:
           components: clippy
       - run: cargo check -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf
       - run: cargo clippy -p espbewi-boot --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
+
+  watchdog-esp32c3:
+    needs: changes
+    if: needs.changes.outputs.watchdog == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          targets: riscv32imc-unknown-none-elf
+          components: clippy
+      - run: cargo check -p espbewi-watchdog --features esp32c3 --target riscv32imc-unknown-none-elf
+      - run: cargo clippy -p espbewi-watchdog --features esp32c3 --target riscv32imc-unknown-none-elf -- -D warnings
 
   flash-esp32c3:
     needs: changes
@@ -256,6 +270,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: esp-rs/xtensa-toolchain@v1.6
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           default: true
           buildtargets: esp32s3
