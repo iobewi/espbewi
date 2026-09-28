@@ -24,7 +24,7 @@ esp32s3 = [
 shared-flash = ["dep:espbewi-flash", "dep:sha2"]
 
 [dependencies]
-fibewi = { git = "https://github.com/iobewi/fibewi", rev = "49a40c93637f625bc27e97a634d596bfab761247", default-features = false, features = ["engine", "boot"] }
+fibewi = { git = "https://github.com/iobewi/fibewi", rev = "5d086645fc612d3da49ae5d779b57ffbf295b775", default-features = false, features = ["engine", "boot"] }
 embedded-storage = "0.3.1"
 esp-bootloader-esp-idf = { version = "=0.5.0", default-features = false }
 espbewi-partitions = { path = "../../hardware/partitions", default-features = false }
