@@ -34,7 +34,7 @@ esp-hal = { version = "~1.1.0", default-features = false }
 esp-println = { version = "0.17.0", default-features = false }
 espbewi-boot = { path = "../../hardware/boot", default-features = false }
 espbewi-platform = { path = "../../hardware/platform" }
-fibewi = { git = "https://github.com/iobewi/fibewi", rev = "dd6a7a93d00c9c56cf8b12af1f5ea92f4957e9ad", default-features = false, features = ["boot"] }
+fibewi = { git = "https://github.com/iobewi/fibewi", rev = "d0e48440bbb0ad21cc5ab13a3d7c9aec65533394", default-features = false, features = ["boot"] }
 
 [profile.dev]
 opt-level = "s"
