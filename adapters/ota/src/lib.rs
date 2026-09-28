@@ -26,6 +26,8 @@ use espbewi_partitions::{
 };
 
 pub mod otadata;
+#[cfg(feature = "shared-flash")]
+pub mod shared_flash;
 
 /// Scratch size required by the ESP-IDF partition table parser.
 pub const PARTITION_TABLE_BUFFER_SIZE: usize = PARTITION_TABLE_MAX_LEN;
@@ -38,6 +40,14 @@ pub enum AppSlot {
 }
 
 impl AppSlot {
+    pub fn from_name(name: &str) -> Option<Self> {
+        match name {
+            "ota_0" => Some(Self::Ota0),
+            "ota_1" => Some(Self::Ota1),
+            _ => None,
+        }
+    }
+
     pub const fn as_str(self) -> &'static str {
         match self {
             Self::Ota0 => "ota_0",
