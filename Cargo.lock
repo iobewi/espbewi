@@ -1466,6 +1466,7 @@ dependencies = [
  "espbewi-flash",
  "espbewi-partitions",
  "fibewi",
+ "sha2",
 ]
 
 [[package]]

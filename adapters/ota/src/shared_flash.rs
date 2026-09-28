@@ -7,9 +7,10 @@ extern crate alloc;
 
 use alloc::boxed::Box;
 use alloc::vec;
-use embedded_storage::nor_flash::NorFlash;
+use embedded_storage::nor_flash::{NorFlash, ReadNorFlash};
 use espbewi_flash::{EspFlash, SharedFlash};
-use fibewi::{BackendOutcome, Committed, Error, WriteSession};
+use fibewi::{BackendOutcome, Committed, Digest, Error, WriteSession};
+use sha2::{Digest as _, Sha256};
 
 use crate::{
     AppPartition, AppSlot, EspArtifactStorage, FlashWriteError,
@@ -72,6 +73,31 @@ pub async fn boot_info(flash: &SharedFlash) -> otadata::BootEntry {
 pub const fn erase_batch_size() -> u64 { 64 * 1024 }
 
 pub const fn erase_size() -> usize { <EspFlash as NorFlash>::ERASE_SIZE }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PreloadedError { NoTarget, TooLarge, Flash }
+
+/// Hash the factory-preloaded image in the inactive slot before FiBeWI
+/// publishes a staged transaction. The flash lock is released before any
+/// ConfigSpace commit by the caller.
+pub async fn hash_preloaded(flash: &SharedFlash, size: u32) -> Result<(AppSlot, Digest), PreloadedError> {
+    let mut guard = flash.lock().await;
+    let target = write_target_locked(&mut guard).map_err(|_| PreloadedError::NoTarget)?;
+    if size as usize > target.size {
+        return Err(PreloadedError::TooLarge);
+    }
+    let mut hasher = Sha256::new();
+    let mut buf = [0u8; 4096];
+    let mut offset = 0u32;
+    while offset < size {
+        let take = ((size - offset) as usize).min(buf.len());
+        ReadNorFlash::read(guard.storage(), target.offset + offset, &mut buf[..take])
+            .map_err(|_| PreloadedError::Flash)?;
+        hasher.update(&buf[..take]);
+        offset += take as u32;
+    }
+    Ok((target.slot, Digest(hasher.finalize().into())))
+}
 
 /// ESP physical state for one FiBeWI upload session. The FiBeWI engine keeps
 /// the received/durable watermarks and digest; only flash geometry lives here.
